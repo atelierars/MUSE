@@ -97,8 +97,4 @@ final class RationalTests: XCTestCase {
 			XCTAssertEqual(Float64(x.rounding(denominator: 4, toward: .infinite)), (Float64(x)*4).rounded(.awayFromZero)/4, accuracy: 1e-5)
 		}
 	}
-	func testParse() {
-		let x = 3.142857142857143 as Rational<Int>
-		print(x)
-	}
 }
