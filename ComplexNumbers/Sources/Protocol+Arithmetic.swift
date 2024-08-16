@@ -4,7 +4,7 @@
 //
 //  Created by kotan.kn on 8/16/R6.
 //
-extension ComplexNumberProtocol {
+extension ComplexNumber {
 	@inline(__always)
 	@inlinable
 	public static func+(lhs: Self, rhs: Self) -> Self {
@@ -27,7 +27,7 @@ extension ComplexNumberProtocol {
 		return.init(real: real, imag: imag)
 	}
 }
-extension ComplexNumberProtocol {
+extension ComplexNumber {
 	@inline(__always)
 	@inlinable
 	public static func+=(lhs: inout Self, rhs: Self) {
@@ -44,7 +44,7 @@ extension ComplexNumberProtocol {
 		lhs = lhs * rhs
 	}
 }
-extension ComplexNumberProtocol where FloatLiteralType: BinaryInteger {
+extension ComplexNumber where FloatLiteralType: BinaryInteger {
 	@inline(__always)
 	@inlinable
 	public static func/(lhs: Self, rhs: Self) -> Self {
@@ -59,7 +59,7 @@ extension ComplexNumberProtocol where FloatLiteralType: BinaryInteger {
 		lhs = lhs / rhs
 	}
 }
-extension ComplexNumberProtocol where FloatLiteralType: BinaryFloatingPoint {
+extension ComplexNumber where FloatLiteralType: BinaryFloatingPoint {
 	@inline(__always)
 	@inlinable
 	public static func/(lhs: Self, rhs: Self) -> Self {
@@ -74,9 +74,17 @@ extension ComplexNumberProtocol where FloatLiteralType: BinaryFloatingPoint {
 		lhs = lhs / rhs
 	}
 }
-
-extension ComplexNumberProtocol {
+extension ComplexNumber {
+	@inline(__always)
+	@inlinable
 	public static prefix func-(_ χ: Self) -> Self {
 		.init(real: -χ.real, imag: -χ.imag)
+	}
+}
+extension ComplexNumber {
+	@inline(__always)
+	@inlinable
+	public static func==(lhs: Self, rhs: Self) -> Bool {
+		(lhs.real, lhs.imag) == (rhs.real, rhs.imag)
 	}
 }

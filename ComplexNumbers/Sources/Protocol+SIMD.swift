@@ -5,7 +5,7 @@
 //  Created by kotan.kn on 8/16/R6.
 //
 import simd
-extension ComplexNumberProtocol where FloatLiteralType: SIMDScalar & BinaryFloatingPoint {
+extension ComplexNumber where FloatLiteralType: SIMDScalar & BinaryFloatingPoint {
 	public static func+(lhs: Self, rhs: Self) -> Self {
 		unsafeBitCast(unsafeBitCast(lhs, to: SIMD2<FloatLiteralType>.self) + unsafeBitCast(rhs, to: SIMD2<FloatLiteralType>.self), to: Self.self)
 	}
@@ -13,7 +13,7 @@ extension ComplexNumberProtocol where FloatLiteralType: SIMDScalar & BinaryFloat
 		unsafeBitCast(unsafeBitCast(lhs, to: SIMD2<FloatLiteralType>.self) - unsafeBitCast(rhs, to: SIMD2<FloatLiteralType>.self), to: Self.self)
 	}
 }
-extension ComplexNumberProtocol where FloatLiteralType == Float32 {
+extension ComplexNumber where FloatLiteralType == Float32 {
 	public init(r: FloatLiteralType, θ: FloatLiteralType) {
 		self = unsafeBitCast(r * unsafeBitCast(__sincosf_stret(θ), to: SIMD2<FloatLiteralType>.self), to: Self.self)
 	}
@@ -33,7 +33,7 @@ extension ComplexNumberProtocol where FloatLiteralType == Float32 {
 		length_squared(unsafeBitCast(self, to: SIMD2<FloatLiteralType>.self))
 	}
 }
-extension ComplexNumberProtocol where FloatLiteralType == Float64 {
+extension ComplexNumber where FloatLiteralType == Float64 {
 	public init(r: FloatLiteralType, θ: FloatLiteralType) {
 		self = unsafeBitCast(r * unsafeBitCast(__sincos_stret(θ), to: SIMD2<FloatLiteralType>.self), to: Self.self)
 	}
