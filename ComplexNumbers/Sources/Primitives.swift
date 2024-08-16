@@ -2,7 +2,7 @@
 //  Primitives.swift
 //
 //
-//  Created by Kota on 8/16/R6.
+//  Created by kotan.kn on 8/16/R6.
 //
 import Accelerate
 import LaTeX
