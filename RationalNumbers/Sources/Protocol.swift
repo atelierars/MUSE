@@ -1,16 +1,16 @@
 //
-//  Protocol`.swift
+//  Protocol.swift
 //  
 //
 //  Created by kotan.kn on 8/16/R6.
 //
-public protocol RationalNumberProtocol<IntegerLiteralType>: Numeric & Comparable & CustomStringConvertible & Hashable where IntegerLiteralType: BinaryInteger {
+public protocol RationalNumber<IntegerLiteralType>: Numeric & Comparable & CustomStringConvertible & Hashable where IntegerLiteralType: BinaryInteger {
 	var numerator: IntegerLiteralType { get }
 	var denominator: IntegerLiteralType { get }
 	init(numerator: IntegerLiteralType, denominator: IntegerLiteralType)
 }
 // Basics
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inline(__always)
 	@inlinable
 	public init?<T>(exactly source: T) where T : BinaryInteger {
@@ -27,16 +27,22 @@ extension RationalNumberProtocol {
 	public init(_ numerator: IntegerLiteralType, _ denominator: IntegerLiteralType = 1) {
 		self.init(numerator: numerator, denominator: denominator)
 	}
+	@inline(__always)
+	@inlinable
+	public init(_ value: some RationalNumber<IntegerLiteralType>) {
+		let (numerator, denominator) = value.factor
+		self.init(numerator: numerator, denominator: denominator)
+	}
 }
 // Foundations
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inline(__always)
 	@inlinable
 	public var inverse: Self {
 		.init(numerator: denominator, denominator: numerator)
 	}
 }
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inline(__always)
 	@inlinable
 	var factor: (IntegerLiteralType, IntegerLiteralType) {
@@ -60,7 +66,7 @@ extension RationalNumberProtocol {
 	}
 }
 // Equatable
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inline(__always)
 	@inlinable
 	public static func==(lhs: Self, rhs: Self) -> Bool {
@@ -68,7 +74,7 @@ extension RationalNumberProtocol {
 	}
 }
 // Comparable
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inline(__always)
 	@inlinable
 	public static func<(lhs: Self, rhs: Self) -> Bool {
@@ -90,7 +96,7 @@ extension RationalNumberProtocol {
 		comparison(lhs: lhs, rhs: rhs, comparator: >=)
 	}
 }
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inlinable
 	public var isInfinite: Bool {
 		denominator == .zero && numerator != .zero

@@ -4,7 +4,7 @@
 //
 //  Created by kotan.kn on 8/16/R6.
 //
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inline(__always)
 	@inlinable
 	public static func+(lhs: Self, rhs: Self) -> Self {
@@ -46,7 +46,7 @@ extension RationalNumberProtocol {
 		return.init(numerator: div(ln, n) * div(rd, d), denominator: div(ld, d) * div(rn, n))
 	}
 }
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inline(__always)
 	@inlinable
 	public static func+=(lhs: inout Self, rhs: Self) {
@@ -68,7 +68,7 @@ extension RationalNumberProtocol {
 		lhs = lhs / rhs
 	}
 }
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inline(__always)
 	@inlinable
 	public static func%(lhs: Self, rhs: Self) -> Self {
@@ -87,7 +87,7 @@ extension RationalNumberProtocol {
 		}
 	}
 }
-extension RationalNumberProtocol where IntegerLiteralType: SignedInteger {
+extension RationalNumber where IntegerLiteralType: SignedInteger {
 	@inline(__always)
 	@inlinable
 	public static prefix func-(_ χ: Self) -> Self {

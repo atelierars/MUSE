@@ -13,7 +13,7 @@ public struct Rational<IntegerLiteralType: BinaryInteger & _ExpressibleByBuiltin
 		self.denominator = denominator
 	}
 }
-extension Rational: RationalNumberProtocol {
+extension Rational: RationalNumber {
 	public typealias Magnitude = Rational<IntegerLiteralType.Magnitude>
 	@inline(__always)
 	@inlinable

@@ -7,11 +7,11 @@
 import func Darwin.modf
 extension BinaryFloatingPoint {
 	@inlinable
-	public init(_ value: some RationalNumberProtocol) {
+	public init(_ value: some RationalNumber) {
 		self = Self(value.numerator) / Self(value.denominator)
 	}
 }
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inlinable
 	public init<Real: BinaryFloatingPoint>(_ χ: Real, error ε: Real = Real.ulpOfOne.squareRoot(), limit N: IntegerLiteralType = 1 << ( Real.significandBitCount / 2 )) {
 		let (i, f) = switch modf(χ) {

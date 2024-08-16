@@ -16,7 +16,7 @@ extension Sequence {
 		try reversed().reduce(into: result, updateAccumulatingResult)
 	}
 }
-extension RationalNumberProtocol { // Rational number from continued fraction sequence
+extension RationalNumber { // Rational number from continued fraction sequence
 	@inline(__always)
 	@inlinable
 	public init(continuedFraction sequence: some Sequence<IntegerLiteralType>) {

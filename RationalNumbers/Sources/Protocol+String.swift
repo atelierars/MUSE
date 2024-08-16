@@ -6,7 +6,7 @@
 //
 import RegexBuilder
 import LaTeX
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inline(__always)
 	@inlinable
 	public var description: String {
@@ -26,7 +26,7 @@ extension RationalNumberProtocol {
 		}
 	}
 }
-extension RationalNumberProtocol where IntegerLiteralType: FixedWidthInteger {
+extension RationalNumber where IntegerLiteralType: FixedWidthInteger {
 	@inline(__always)
 	@inlinable
 	public init?(_ string: String) {
@@ -66,7 +66,7 @@ extension RationalNumberProtocol where IntegerLiteralType: FixedWidthInteger {
 		self.init(numerator: numerator, denominator: match.output.2.flatMap { .init($0) } ?? 1)
 	}
 }
-extension RationalNumberProtocol where IntegerLiteralType: CustomLaTeXStringConvertible {
+extension RationalNumber where IntegerLiteralType: CustomLaTeXStringConvertible {
 	public var latexDescription: String {
 		"\\frac{\(numerator.latexDescription)}{\(denominator.latexDescription)}"
 	}

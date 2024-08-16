@@ -11,7 +11,7 @@ public enum RoundingToward {
 	case negative
 	case infinite
 }
-extension RationalNumberProtocol {
+extension RationalNumber {
 	@inline(__always)
 	@inlinable
 	public func rounding(denominator: IntegerLiteralType, toward: RoundingToward = .zero) -> Self {
