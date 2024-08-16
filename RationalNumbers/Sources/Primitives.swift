@@ -6,6 +6,8 @@
 //
 import protocol LaTeX.CustomLaTeXStringConvertible
 import Real_
+@_exported import func Integer_.gcd
+@_exported import func Integer_.lcm
 public struct Rational<IntegerLiteralType: BinaryInteger & _ExpressibleByBuiltinIntegerLiteral> where IntegerLiteralType.Magnitude: BinaryInteger & _ExpressibleByBuiltinIntegerLiteral {
 	public var numerator: IntegerLiteralType
 	public var denominator: IntegerLiteralType
