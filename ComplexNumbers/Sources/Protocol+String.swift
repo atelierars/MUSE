@@ -25,6 +25,8 @@ extension ComplexNumber where FloatLiteralType: BinaryFloatingPoint {
 	@inlinable
 	public var description: String {
 		switch (real, imag) {
+		case (0, 0):
+			"0"
 		case (let r, 0):
 			"\(r)"
 		case (let r, _) where r.isNaN:
@@ -40,6 +42,15 @@ extension ComplexNumber where FloatLiteralType: BinaryFloatingPoint {
 }
 extension ComplexNumber where FloatLiteralType: CustomLaTeXStringConvertible {
 	public var latexDescription: String {
-		""
+		switch (real, imag) {
+		case (0, 0):
+			"0"
+		case (let r, 0):
+			"\(r.latexDescription)"
+		case (0, let i):
+			"\(i.latexDescription)j"
+		case let (r, i):
+			"\(r.latexDescription)+\(i.latexDescription)j"
+		}
 	}
 }

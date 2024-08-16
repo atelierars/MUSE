@@ -10,6 +10,13 @@ let package = Package(
 	],
     products: [
 		.library(
+			name: "MUSE",
+			targets: [
+				"RationalNumbers",
+				"ComplexNumbers",
+			]
+		),
+		.library(
 			name: "RationalNumbers",
 			targets: ["RationalNumbers"]
 		),
