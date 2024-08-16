@@ -1,5 +1,5 @@
 //
-//  Real+SpecialFunctions.swift
+//  SpecialFunctions.swift
 //  
 //
 //  Created by kotan.kn on 8/16/R6.

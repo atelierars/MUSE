@@ -11,36 +11,37 @@ let package = Package(
     products: [
 		.library(
 			name: "RationalNumers",
-			targets: ["RationalNumbers"]
+			targets: ["Rational"]
 		),
 		.library(
 			name: "ComplexNumbers",
-			targets: ["ComplexNumbers"]
+			targets: ["Complex"]
 		),
-        .library(
-            name: "MUSE",
-            targets: ["RationalNumbers", "ComplexNumbers"]),
     ],
     targets: [
 		.target(
-			name: "ComplexNumbers",
+			name: "Complex",
 			dependencies: [.target(name: "LaTeX")],
-			path: "ComplexNumbers/Sources"
+			path: "Complex/Sources"
 		),
 		.target(
-			name: "RationalNumbers",
+			name: "Rational",
 			dependencies: [.target(name: "LaTeX")],
-			path: "RationalNumbers/Sources"
+			path: "Rational/Sources"
 		),
 		.testTarget(
-			name: "ComplexNumbersTests",
-			dependencies: [.target(name: "ComplexNumbers")],
-			path: "ComplexNumbers/Tests"
+			name: "ComplexTests",
+			dependencies: [.target(name: "Complex")],
+			path: "ComplexTests/Tests"
 		),
 		.testTarget(
-			name: "RationalNumbersTests",
-			dependencies: [.target(name: "RationalNumbers")],
-			path: "RationalNumbers/Tests"
+			name: "RationalTests",
+			dependencies: [.target(name: "Rational")],
+			path: "Rational/Tests"
+		),
+		.target(
+			name: "Real",
+			path: "Real/Sources"
 		),
 		.target(
 			name: "LaTeX",

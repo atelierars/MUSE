@@ -1,5 +1,5 @@
 //
-//  Real+ElementaryFunctions.swift
+//  ElementaryFunctions.swift
 //  
 //
 //  Created by kotan.kn on 8/16/R6.
