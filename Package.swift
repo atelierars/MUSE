@@ -1,6 +1,5 @@
 // swift-tools-version: 5.9
 import PackageDescription
-
 let package = Package(
     name: "MUSE",
 	platforms: [
@@ -10,7 +9,14 @@ let package = Package(
 		.macCatalyst(.v17)
 	],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
+		.library(
+			name: "RationalNumers",
+			targets: ["RationalNumbers"]
+		),
+		.library(
+			name: "ComplexNumbers",
+			targets: ["ComplexNumbers"]
+		),
         .library(
             name: "MUSE",
             targets: ["RationalNumbers", "ComplexNumbers"]),
