@@ -5,6 +5,7 @@
 //  Created by kotan.kn on 8/16/R6.
 //
 import func Darwin.modf
+import Real_
 extension BinaryFloatingPoint {
 	@inlinable
 	public init(_ value: some RationalNumber) {
@@ -12,6 +13,7 @@ extension BinaryFloatingPoint {
 	}
 }
 extension RationalNumber {
+	@inline(__always) // farey sequence
 	@inlinable
 	public init<Real: BinaryFloatingPoint>(_ χ: Real, error ε: Real = Real.ulpOfOne.squareRoot(), limit N: IntegerLiteralType = 1 << ( Real.significandBitCount / 2 )) {
 		let (i, f) = switch modf(χ) {
@@ -45,5 +47,29 @@ extension RationalNumber {
 			(( a + c + .init(i) * ( b + d ) ) / 2, ( b + d ) / 2)
 		}
 		self.init(numerator: numerator, denominator: denominator)
+	}
+}
+extension RationalNumber where IntegerLiteralType: SignedInteger {
+	/* 
+	 NOTE: IEEE754 numbers are at least finite termed continued fractions.
+	 it is of course unclear whether the bitwidth is sufficient
+	 Use farey method (above one) or manually specify termination to expand continued fraction
+	 like SomeRational.init(continuedFraction: FLP_VALUE.continuedFractionSequence().prefix(LIMIT))
+	 */
+	@inline(__always)
+	@inlinable
+	public init(floatLiteral value: FloatLiteralType) {
+		self = switch (value.sign, value.exponent) {
+		case (.plus, 0...):
+			Self(numerator: 1 << value.exponent, denominator: 1) * Self(continuedFraction: value.significand.continuedFractionSequence())
+		case (.minus, 0...):
+			Self(numerator: 1 << value.exponent, denominator: -1) * Self(continuedFraction: value.significand.continuedFractionSequence())
+		case (.plus, ...0):
+			Self(numerator: 1, denominator: 1 << -value.exponent) * Self(continuedFraction: value.significand.continuedFractionSequence())
+		case (.minus, ...0):
+			Self(numerator: -1, denominator: 1 << -value.exponent) * Self(continuedFraction: value.significand.continuedFractionSequence())
+		default:
+			Self(numerator: 0, denominator: 0)
+		}
 	}
 }

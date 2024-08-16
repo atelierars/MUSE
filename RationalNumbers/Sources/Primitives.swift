@@ -24,25 +24,7 @@ extension Rational: RationalNumber {
 	}
 }
 extension Rational: CustomLaTeXStringConvertible where IntegerLiteralType: CustomLaTeXStringConvertible {}
-extension Rational: ExpressibleByFloatLiteral where IntegerLiteralType: SignedInteger {
-	/* NOTE: IEEE754 numbers are at least finite termed continued fractions. it is of course unclear whether the bitwidth is sufficient */
-	@inline(__always) //
-	@inlinable
-	public init(floatLiteral value: FloatLiteralType) {
-		self = switch (value.sign, value.exponent) {
-		case (.plus, 0...):
-			Self(numerator: 1 << value.exponent, denominator: 1) * Self(continuedFraction: value.significand.continuedFractionSequence())
-		case (.minus, 0...):
-			Self(numerator: 1 << value.exponent, denominator: -1) * Self(continuedFraction: value.significand.continuedFractionSequence())
-		case (.plus, ...0):
-			Self(numerator: 1, denominator: 1 << -value.exponent) * Self(continuedFraction: value.significand.continuedFractionSequence())
-		case (.minus, ...0):
-			Self(numerator: -1, denominator: 1 << -value.exponent) * Self(continuedFraction: value.significand.continuedFractionSequence())
-		default:
-			Self(numerator: 0, denominator: 0)
-		}
-	}
-}
+extension Rational: ExpressibleByFloatLiteral where IntegerLiteralType: SignedInteger {}
 public typealias Rational16 = Rational<Int8>
 public typealias Rational32 = Rational<Int16>
 public typealias Rational64 = Rational<Int32>
