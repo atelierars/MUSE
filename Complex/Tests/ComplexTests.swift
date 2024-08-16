@@ -5,7 +5,7 @@
 //  Created by kotan.kn on 8/16/R6.
 //
 import XCTest
-@testable import ComplexNumbers
+@testable import Complex
 final class ComplexTests: XCTestCase {
 	
 }

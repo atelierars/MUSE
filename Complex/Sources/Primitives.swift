@@ -9,9 +9,8 @@ import LaTeX
 public struct Complex<FloatLiteralType: BinaryFloatingPoint & _ExpressibleByBuiltinFloatLiteral>: Numeric & Comparable & CustomStringConvertible & Hashable {
 	public var real: FloatLiteralType
 	public var imag: FloatLiteralType
-	public init(real: FloatLiteralType, imag: FloatLiteralType) {
-		self.real = real
-		self.imag = imag
+	public init(real r: FloatLiteralType, imag i: FloatLiteralType) {
+		(real, imag) = (r, i)
 	}
 }
 extension Complex: ComplexNumber {

@@ -32,7 +32,7 @@ let package = Package(
 		.testTarget(
 			name: "ComplexTests",
 			dependencies: [.target(name: "Complex")],
-			path: "ComplexTests/Tests"
+			path: "Complex/Tests"
 		),
 		.testTarget(
 			name: "RationalTests",

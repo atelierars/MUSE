@@ -8,9 +8,8 @@ import protocol LaTeX.CustomLaTeXStringConvertible
 public struct Rational<IntegerLiteralType: BinaryInteger & _ExpressibleByBuiltinIntegerLiteral> where IntegerLiteralType.Magnitude: BinaryInteger & _ExpressibleByBuiltinIntegerLiteral {
 	public var numerator: IntegerLiteralType
 	public var denominator: IntegerLiteralType
-	public init(numerator: IntegerLiteralType, denominator: IntegerLiteralType) {
-		self.numerator = numerator
-		self.denominator = denominator
+	public init(numerator n: IntegerLiteralType, denominator d: IntegerLiteralType) {
+		(numerator, denominator) = (n, d)
 	}
 }
 extension Rational: RationalNumber {

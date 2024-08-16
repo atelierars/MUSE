@@ -5,7 +5,7 @@
 //  Created by kotan.kn on 8/16/R6.
 //
 import XCTest
-@testable import RationalNumbers
+@testable import Rational
 final class BinaryIntegerTests: XCTestCase {
 	func testPrime() {
 		let primes = Int.Prime.prefix(11)
