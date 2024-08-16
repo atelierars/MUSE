@@ -10,38 +10,52 @@ let package = Package(
 	],
     products: [
 		.library(
-			name: "RationalNumers",
-			targets: ["Rational"]
+			name: "RationalNumbers",
+			targets: ["RationalNumbers"]
 		),
 		.library(
 			name: "ComplexNumbers",
-			targets: ["Complex"]
+			targets: ["ComplexNumbers"]
 		),
     ],
     targets: [
 		.target(
-			name: "Complex",
-			dependencies: [.target(name: "LaTeX")],
-			path: "Complex/Sources"
+			name: "ComplexNumbers",
+			dependencies: [.target(name: "LaTeX"), .target(name: "Real+")],
+			path: "ComplexNumbers/Sources"
 		),
 		.target(
-			name: "Rational",
-			dependencies: [.target(name: "LaTeX")],
-			path: "Rational/Sources"
+			name: "RationalNumbers",
+			dependencies: [.target(name: "LaTeX"), .target(name: "Real+"), .target(name: "Integer+")],
+			path: "RationalNumbers/Sources"
 		),
 		.testTarget(
-			name: "ComplexTests",
-			dependencies: [.target(name: "Complex")],
-			path: "Complex/Tests"
+			name: "ComplexNumbersTests",
+			dependencies: [.target(name: "ComplexNumbers")],
+			path: "ComplexNumbers/Tests"
 		),
 		.testTarget(
-			name: "RationalTests",
-			dependencies: [.target(name: "Rational")],
-			path: "Rational/Tests"
+			name: "RationalNumbersTests",
+			dependencies: [.target(name: "RationalNumbers")],
+			path: "RationalNumbers/Tests"
 		),
 		.target(
-			name: "Real",
-			path: "Real/Sources"
+			name: "Integer+",
+			path: "Integer+/Sources"
+		),
+		.target(
+			name: "Real+",
+			path: "Real+/Sources"
+		),
+		.testTarget(
+			name: "Integer+Tests",
+			dependencies: [.target(name: "Integer+")],
+			path: "Integer+/Tests"
+		),
+		.testTarget(
+			name: "Real+Tests",
+			dependencies: [.target(name: "Real+")],
+			path: "Real+/Tests"
 		),
 		.target(
 			name: "LaTeX",
