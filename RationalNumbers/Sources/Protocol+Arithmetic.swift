@@ -1,6 +1,6 @@
 //
 //  Protocol+Arithmetic.swift
-//  
+//  RationalNumbers
 //
 //  Created by kotan.kn on 8/16/R6.
 //
