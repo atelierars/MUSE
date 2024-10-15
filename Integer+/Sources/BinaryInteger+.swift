@@ -6,7 +6,7 @@
 //
 @inline(__always)
 @inlinable
-public func div<Z: BinaryInteger>(_ x: Z, _ y: Z) -> Z { // private use, avoid aborting, suitable for NaN and Inf formats (_, 0)
+public func div<Z: BinaryInteger>(_ x: Z, _ y: Z) -> Z { // for private use, avoid aborting, suitable for NaN and Inf formats (_, 0)
 	y == .zero ? .zero : ( x / y )
 }
 @inline(__always)
