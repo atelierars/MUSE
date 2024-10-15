@@ -1,11 +1,11 @@
 //
 //  Protocol.swift
-//  
+//  RationalNumbers
 //
 //  Created by kotan.kn on 8/16/R6.
 //
 import Integer_
-public protocol RationalNumber<IntegerLiteralType>: Numeric & Comparable & CustomStringConvertible & Hashable where IntegerLiteralType: BinaryInteger {
+public protocol RationalNumber<IntegerLiteralType>: Numeric & Comparable & CustomStringConvertible & Hashable & Sendable & Copyable where IntegerLiteralType: BinaryInteger {
 	var numerator: IntegerLiteralType { get }
 	var denominator: IntegerLiteralType { get }
 	init(numerator: IntegerLiteralType, denominator: IntegerLiteralType)
