@@ -1,6 +1,6 @@
 //
 //  ParallelMap.swift
-//  
+//  Layout
 //
 //  Created by Kota on 9/6/R6.
 //
