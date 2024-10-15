@@ -1,11 +1,42 @@
 //
 //  Protocol+BinaryFloatingPoint+.swift
-//
+//	RationalNumbers
 //
 //  Created by kotan.kn on 8/16/R6.
 //
 import func Darwin.modf
+import func Darwin.fma
 import Real_
+
+// Stern–Brocot tree
+func bs2<R: BinaryFloatingPoint>(r: R) -> (Int, Int) {
+	let (s, u) = modf(r)
+	let v = -u.magnitude
+	guard v.isNormal else { return (Int(s), 1) }
+	var (a, b) = (1,  0)
+	var (c, d) = (0,  1)
+	repeat {
+		let p = b + d
+		let q = a + c
+		let t = R(q * q).ulp + .ulpOfOne
+		switch fma(v, R(q), R(p)) {
+		case ( t)...:
+			c += a
+			d += b
+		case ...(-t):
+			a += c
+			b += d
+		default:
+			switch u.sign {
+			case.plus:
+				return (Int(s) * q + p, q)
+			case.minus:
+				return (Int(s) * q - p, q)
+			}
+		}
+	} while true
+}
+
 extension BinaryFloatingPoint {
 	@inlinable
 	public init(_ value: some RationalNumber) {
