@@ -4,7 +4,7 @@
 //
 //  Created by kotan.kn on 8/16/R6.
 //
-public protocol ComplexNumber<FloatLiteralType>: Numeric & Comparable & Hashable & CustomStringConvertible where IntegerLiteralType == FloatLiteralType.IntegerLiteralType, Magnitude == FloatLiteralType {
+public protocol ComplexNumber<FloatLiteralType>: Numeric & Comparable & Hashable & CustomStringConvertible & Sendable & Copyable where IntegerLiteralType == FloatLiteralType.IntegerLiteralType, Magnitude == FloatLiteralType {
 	associatedtype FloatLiteralType: SignedNumeric & Comparable & Hashable
 	var real: FloatLiteralType { get }
 	var imag: FloatLiteralType { get }
@@ -68,13 +68,6 @@ extension ComplexNumber {
 	}
 	public static func>=(lhs: Self, rhs: Self) -> Bool {
 		lhs.magnitude >= rhs.magnitude
-	}
-}
-extension ComplexNumber {
-	@inline(__always)
-	@inlinable
-	public var magnitude: Magnitude {
-		real * real + imag * imag
 	}
 }
 extension ComplexNumber where FloatLiteralType: ComplexNumber {
