@@ -11,39 +11,39 @@ let package = Package(
     products: [
     ],
     targets: [
-		.target(
-			name: "MSG",
-			dependencies: ["Dense", "ComplexNumbers"],
-			path: "MSG/Sources"
-		),
-		.target(
-			name: "MPS",
-			dependencies: ["Dense", "ComplexNumbers"],
-			path: "MPS/Sources"
-		),
-		.target(
-			name: "ALT",
-			dependencies: ["Dense", "ComplexNumbers"],
-			path: "ALT/Sources"
-		),
-		.target(
-			name: "LinearAlgebra",
-			dependencies: ["Dense", "Sparse"],
-			path: "LinearAlgebra/Sources",
-			cSettings: [
-				.define("ACCELERATE_NEW_LAPACK"),
-				.define("ACCELERATE_LAPACK_ILP64")
-			]
-		),
-		.target(
-			name: "Sparse",
-			dependencies: ["Dense"],
-			path: "Sparse/Sources",
-			cSettings: [
-				.define("ACCELERATE_NEW_LAPACK"),
-				.define("ACCELERATE_LAPACK_ILP64")
-			]
-		),
+//		.target(
+//			name: "MSG",
+//			dependencies: ["Dense", "ComplexNumbers"],
+//			path: "MSG/Sources"
+//		),
+//		.target(
+//			name: "MPS",
+//			dependencies: ["Dense", "ComplexNumbers"],
+//			path: "MPS/Sources"
+//		),
+//		.target(
+//			name: "ALT",
+//			dependencies: ["Dense", "ComplexNumbers"],
+//			path: "ALT/Sources"
+//		),
+//		.target(
+//			name: "LinearAlgebra",
+//			dependencies: ["Dense", "Sparse"],
+//			path: "LinearAlgebra/Sources",
+//			cSettings: [
+//				.define("ACCELERATE_NEW_LAPACK"),
+//				.define("ACCELERATE_LAPACK_ILP64")
+//			]
+//		),
+//		.target(
+//			name: "Sparse",
+//			dependencies: ["Dense"],
+//			path: "Sparse/Sources",
+//			cSettings: [
+//				.define("ACCELERATE_NEW_LAPACK"),
+//				.define("ACCELERATE_LAPACK_ILP64")
+//			]
+//		),
 		.target(
 			name: "Dense",
 			dependencies: ["LaTeX", "Layout", "ComplexNumbers"],
@@ -94,31 +94,16 @@ let package = Package(
 			name: "Real+",
 			path: "Real+/Sources"
 		),
-		.testTarget(
-			name: "Integer+Tests",
-			dependencies: [.target(name: "Integer+")],
-			path: "Integer+/Tests"
-		),
-		.testTarget(
-			name: "Real+Tests",
-			dependencies: [.target(name: "Real+")],
-			path: "Real+/Tests"
-		),
-		.testTarget(
-			name: "LayoutTests",
-			dependencies: [.target(name: "Layout")],
-			path: "Layout/Tests"
-		),
-		.testTarget(
-			name: "MPSTests",
-			dependencies: [.target(name: "MPS")],
-			path: "MPS/Tests"
-		),
-		.testTarget(
-			name: "ALTTests",
-			dependencies: [.target(name: "ALT")],
-			path: "ALT/Tests"
-		),
+//		.testTarget(
+//			name: "MPSTests",
+//			dependencies: [.target(name: "MPS")],
+//			path: "MPS/Tests"
+//		),
+//		.testTarget(
+//			name: "ALTTests",
+//			dependencies: [.target(name: "ALT")],
+//			path: "ALT/Tests"
+//		),
 //		.testTarget(
 //			name: "LinearAlgebraTests",
 //			dependencies: [.target(name: "LinearAlgebra")],
@@ -128,15 +113,15 @@ let package = Package(
 //				.define("ACCELERATE_LAPACK_ILP64")
 //			]
 //		),
-		.testTarget(
-			name: "SparseTests",
-			dependencies: [.target(name: "Sparse")],
-			path: "Sparse/Tests",
-			cSettings: [
-				.define("ACCELERATE_NEW_LAPACK"),
-				.define("ACCELERATE_LAPACK_ILP64")
-			]
-		),
+//		.testTarget(
+//			name: "SparseTests",
+//			dependencies: [.target(name: "Sparse")],
+//			path: "Sparse/Tests",
+//			cSettings: [
+//				.define("ACCELERATE_NEW_LAPACK"),
+//				.define("ACCELERATE_LAPACK_ILP64")
+//			]
+//		),
 		.testTarget(
 			name: "DenseTests",
 			dependencies: [.target(name: "Dense")],
@@ -145,6 +130,21 @@ let package = Package(
 				.define("ACCELERATE_NEW_LAPACK"),
 				.define("ACCELERATE_LAPACK_ILP64")
 			]
+		),
+		.testTarget(
+			name: "LayoutTests",
+			dependencies: [.target(name: "Layout")],
+			path: "Layout/Tests"
+		),
+		.testTarget(
+			name: "Integer+Tests",
+			dependencies: [.target(name: "Integer+")],
+			path: "Integer+/Tests"
+		),
+		.testTarget(
+			name: "Real+Tests",
+			dependencies: [.target(name: "Real+")],
+			path: "Real+/Tests"
 		),
 		.target(
 			name: "LaTeX",
