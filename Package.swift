@@ -1,12 +1,12 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 import PackageDescription
 let package = Package(
     name: "MUSE",
 	platforms: [
-		.iOS(.v17),
-		.tvOS(.v17),
-		.macOS(.v14),
-		.macCatalyst(.v17)
+		.iOS(.v18),
+		.tvOS(.v18),
+		.macOS(.v15),
+		.macCatalyst(.v18)
 	],
     products: [
 		.library(
@@ -17,19 +17,66 @@ let package = Package(
 			]
 		),
 		.library(
-			name: "RationalNumbers",
-			targets: ["RationalNumbers"]
-		),
-		.library(
-			name: "ComplexNumbers",
-			targets: ["ComplexNumbers"]
+			name: "NDArray",
+			targets: ["Dense", "Sparse", "ALT", "MPS"]
 		),
     ],
     targets: [
 		.target(
+			name: "MSG",
+			dependencies: ["Dense", "ComplexNumbers"],
+			path: "MSG/Sources"
+		),
+		.target(
+			name: "MPS",
+			dependencies: ["Dense", "ComplexNumbers"],
+			path: "MPS/Sources"
+		),
+		.target(
+			name: "ALT",
+			dependencies: ["Dense", "ComplexNumbers"],
+			path: "ALT/Sources"
+		),
+		.target(
+			name: "LinearAlgebra",
+			dependencies: ["Dense", "Sparse"],
+			path: "LinearAlgebra/Sources",
+			cSettings: [
+				.define("ACCELERATE_NEW_LAPACK"),
+				.define("ACCELERATE_LAPACK_ILP64")
+			]
+		),
+		.target(
+			name: "Sparse",
+			dependencies: ["Dense"],
+			path: "Sparse/Sources",
+			cSettings: [
+				.define("ACCELERATE_NEW_LAPACK"),
+				.define("ACCELERATE_LAPACK_ILP64")
+			]
+		),
+		.target(
+			name: "Dense",
+			dependencies: ["LaTeX", "Layout", "ComplexNumbers"],
+			path: "Dense/Sources",
+			cSettings: [
+				.define("ACCELERATE_NEW_LAPACK"),
+				.define("ACCELERATE_LAPACK_ILP64")
+			]
+		),
+		.target(
+			name: "Layout",
+			dependencies: ["Integer+"],
+			path: "Layout/Sources"
+		),
+		.target(
 			name: "ComplexNumbers",
 			dependencies: [.target(name: "LaTeX"), .target(name: "Real+")],
-			path: "ComplexNumbers/Sources"
+			path: "ComplexNumbers/Sources",
+			cSettings: [
+				.define("ACCELERATE_NEW_LAPACK"),
+				.define("ACCELERATE_LAPACK_ILP64")
+			]
 		),
 		.target(
 			name: "RationalNumbers",
@@ -48,7 +95,11 @@ let package = Package(
 		),
 		.target(
 			name: "Integer+",
-			path: "Integer+/Sources"
+			path: "Integer+/Sources",
+			cSettings: [
+				.define("ACCELERATE_NEW_LAPACK"),
+				.define("ACCELERATE_LAPACK_ILP64")
+			]
 		),
 		.target(
 			name: "Real+",
@@ -63,6 +114,48 @@ let package = Package(
 			name: "Real+Tests",
 			dependencies: [.target(name: "Real+")],
 			path: "Real+/Tests"
+		),
+		.testTarget(
+			name: "LayoutTests",
+			dependencies: [.target(name: "Layout")],
+			path: "Layout/Tests"
+		),
+		.testTarget(
+			name: "MPSTests",
+			dependencies: [.target(name: "MPS")],
+			path: "MPS/Tests"
+		),
+		.testTarget(
+			name: "ALTTests",
+			dependencies: [.target(name: "ALT")],
+			path: "ALT/Tests"
+		),
+//		.testTarget(
+//			name: "LinearAlgebraTests",
+//			dependencies: [.target(name: "LinearAlgebra")],
+//			path: "LinearAlgebra/Tests",
+//			cSettings: [
+//				.define("ACCELERATE_NEW_LAPACK"),
+//				.define("ACCELERATE_LAPACK_ILP64")
+//			]
+//		),
+		.testTarget(
+			name: "SparseTests",
+			dependencies: [.target(name: "Sparse")],
+			path: "Sparse/Tests",
+			cSettings: [
+				.define("ACCELERATE_NEW_LAPACK"),
+				.define("ACCELERATE_LAPACK_ILP64")
+			]
+		),
+		.testTarget(
+			name: "DenseTests",
+			dependencies: [.target(name: "Dense")],
+			path: "Dense/Tests",
+			cSettings: [
+				.define("ACCELERATE_NEW_LAPACK"),
+				.define("ACCELERATE_LAPACK_ILP64")
+			]
 		),
 		.target(
 			name: "LaTeX",
