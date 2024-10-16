@@ -9,17 +9,6 @@ let package = Package(
 		.macCatalyst(.v18)
 	],
     products: [
-		.library(
-			name: "MUSE",
-			targets: [
-				"RationalNumbers",
-				"ComplexNumbers",
-			]
-		),
-		.library(
-			name: "NDArray",
-			targets: ["Dense", "Sparse", "ALT", "MPS"]
-		),
     ],
     targets: [
 		.target(
@@ -72,11 +61,11 @@ let package = Package(
 		.target(
 			name: "ComplexNumbers",
 			dependencies: [.target(name: "LaTeX"), .target(name: "Real+")],
-			path: "ComplexNumbers/Sources",
-			cSettings: [
-				.define("ACCELERATE_NEW_LAPACK"),
-				.define("ACCELERATE_LAPACK_ILP64")
-			]
+			path: "ComplexNumbers/Sources"
+//			cSettings: [
+//				.define("ACCELERATE_NEW_LAPACK"),
+//				.define("ACCELERATE_LAPACK_ILP64")
+//			]
 		),
 		.target(
 			name: "RationalNumbers",
