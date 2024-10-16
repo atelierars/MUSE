@@ -49,15 +49,15 @@ let package = Package(
 //				.define("ACCELERATE_LAPACK_ILP64")
 //			]
 //		),
-		.target(
-			name: "Dense",
-			dependencies: ["LaTeX", "Layout", "ComplexNumbers"],
-			path: "Dense/Sources",
-			cSettings: [
-				.define("ACCELERATE_NEW_LAPACK"),
-				.define("ACCELERATE_LAPACK_ILP64")
-			]
-		),
+//		.target(
+//			name: "Dense",
+//			dependencies: ["LaTeX", "Layout", "ComplexNumbers"],
+//			path: "Dense/Sources",
+//			cSettings: [
+//				.define("ACCELERATE_NEW_LAPACK"),
+//				.define("ACCELERATE_LAPACK_ILP64")
+//			]
+//		),
 		.target(
 			name: "Layout",
 			dependencies: ["Integer+"],
