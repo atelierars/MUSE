@@ -9,7 +9,7 @@ let package = Package(
 		.macCatalyst(.v18)
 	],
     products: [
-		.library(name: "MUSE", targets: [
+		.library(name: "Foundations", targets: [
 			"Layout",
 			"ComplexNumbers",
 			"RationalNumbers",
@@ -127,15 +127,15 @@ let package = Package(
 //				.define("ACCELERATE_LAPACK_ILP64")
 //			]
 //		),
-		.testTarget(
-			name: "DenseTests",
-			dependencies: [.target(name: "Dense")],
-			path: "Dense/Tests",
-			cSettings: [
-				.define("ACCELERATE_NEW_LAPACK"),
-				.define("ACCELERATE_LAPACK_ILP64")
-			]
-		),
+//		.testTarget(
+//			name: "DenseTests",
+//			dependencies: [.target(name: "Dense")],
+//			path: "Dense/Tests",
+//			cSettings: [
+//				.define("ACCELERATE_NEW_LAPACK"),
+//				.define("ACCELERATE_LAPACK_ILP64")
+//			]
+//		),
 		.testTarget(
 			name: "LayoutTests",
 			dependencies: [.target(name: "Layout")],
