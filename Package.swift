@@ -3,10 +3,10 @@ import PackageDescription
 let package = Package(
     name: "MUSE",
 	platforms: [
-		.iOS(.v18),
-		.tvOS(.v18),
 		.macOS(.v15),
-		.macCatalyst(.v18)
+		.macCatalyst(.v18),
+		.iOS(.v18),
+		.tvOS(.v18)
 	],
     products: [
 		.library(name: "Foundations", targets: [
