@@ -9,6 +9,11 @@ let package = Package(
 		.macCatalyst(.v18)
 	],
     products: [
+		.library(name: "MUSE", targets: [
+			"Layout",
+			"ComplexNumbers",
+			"RationalNumbers",
+		])
     ],
     targets: [
 //		.target(
