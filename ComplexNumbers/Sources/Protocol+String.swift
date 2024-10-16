@@ -7,8 +7,8 @@
 import RegexBuilder
 import protocol LaTeX.CustomLaTeXStringConvertible
 extension ComplexNumber {
-	@inline(__always)
 	@inlinable
+	@inline(__always)
 	public var description: String {
 		switch (real, imag) {
 		case (let r, 0):
@@ -21,8 +21,8 @@ extension ComplexNumber {
 	}
 }
 extension ComplexNumber where FloatLiteralType: BinaryFloatingPoint {
-	@inline(__always)
 	@inlinable
+	@inline(__always)
 	public var description: String {
 		switch (real, imag) {
 		case (0, 0):
@@ -49,6 +49,8 @@ extension ComplexNumber where FloatLiteralType: CustomLaTeXStringConvertible {
 			"\(r.latexDescription)"
 		case (0, let i):
 			"\(i.latexDescription)j"
+		case let (r, i) where i < 0:
+			"\(r.latexDescription)\(i.latexDescription)j"
 		case let (r, i):
 			"\(r.latexDescription)+\(i.latexDescription)j"
 		}
