@@ -15,41 +15,43 @@ extension ComplexNumber where FloatLiteralType: SIMDScalar & BinaryFloatingPoint
 }
 extension ComplexNumber where FloatLiteralType == Float32 {
 	public init(r: FloatLiteralType, θ: FloatLiteralType) {
-		self = unsafeBitCast(r * unsafeBitCast(__sincosf_stret(θ), to: SIMD2<FloatLiteralType>.self), to: Self.self)
+		let θ = r * unsafeBitCast(__sincosf_stret(θ), to: SIMD2<FloatLiteralType>.self)
+		self.init(real: θ.y, imag: θ.x)
 	}
 	public static func*(lhs: Self, rhs: Self) -> Self {
 		unsafeBitCast(SIMD2(
-			dot(SIMD2(lhs.real, lhs.imag), SIMD2(rhs.real, -rhs.imag)),
-			dot(SIMD2(lhs.real, lhs.imag), SIMD2(rhs.imag,  rhs.real))
+			dot(unsafeBitCast(lhs, to: SIMD2<FloatLiteralType>.self), SIMD2(rhs.real, -rhs.imag)),
+			dot(unsafeBitCast(lhs, to: SIMD2<FloatLiteralType>.self), SIMD2(rhs.imag,  rhs.real))
 		), to: Self.self)
 	}
 	public static func/(lhs: Self, rhs: Self) -> Self {
 		unsafeBitCast(SIMD2(
-			dot(SIMD2(lhs.real, lhs.imag), SIMD2( rhs.real, rhs.imag)),
-			dot(SIMD2(lhs.real, lhs.imag), SIMD2(-rhs.imag, rhs.real))
-		) / rhs.magnitude, to: Self.self)
+			dot(unsafeBitCast(lhs, to: SIMD2<FloatLiteralType>.self), SIMD2( rhs.real, rhs.imag)),
+			dot(unsafeBitCast(lhs, to: SIMD2<FloatLiteralType>.self), SIMD2(-rhs.imag, rhs.real))
+		) / length_squared(unsafeBitCast(rhs, to: SIMD2<FloatLiteralType>.self)), to: Self.self)
 	}
 	public var magnitude: FloatLiteralType {
-		length_squared(unsafeBitCast(self, to: SIMD2<FloatLiteralType>.self))
+		length(unsafeBitCast(self, to: SIMD2<FloatLiteralType>.self))
 	}
 }
 extension ComplexNumber where FloatLiteralType == Float64 {
 	public init(r: FloatLiteralType, θ: FloatLiteralType) {
-		self = unsafeBitCast(r * unsafeBitCast(__sincos_stret(θ), to: SIMD2<FloatLiteralType>.self), to: Self.self)
+		let θ = r * unsafeBitCast(__sincos_stret(θ), to: SIMD2<FloatLiteralType>.self)
+		self.init(real: θ.y, imag: θ.x)
 	}
 	public static func*(lhs: Self, rhs: Self) -> Self {
 		unsafeBitCast(SIMD2(
-			dot(SIMD2(lhs.real, lhs.imag), SIMD2(rhs.real, -rhs.imag)),
-			dot(SIMD2(lhs.real, lhs.imag), SIMD2(rhs.imag,  rhs.real))
+			dot(unsafeBitCast(lhs, to: SIMD2<FloatLiteralType>.self), SIMD2(rhs.real, -rhs.imag)),
+			dot(unsafeBitCast(lhs, to: SIMD2<FloatLiteralType>.self), SIMD2(rhs.imag,  rhs.real))
 		), to: Self.self)
 	}
 	public static func/(lhs: Self, rhs: Self) -> Self {
 		unsafeBitCast(SIMD2(
-			dot(SIMD2(lhs.real, lhs.imag), SIMD2( rhs.real, rhs.imag)),
-			dot(SIMD2(lhs.real, lhs.imag), SIMD2(-rhs.imag, rhs.real))
+			dot(unsafeBitCast(lhs, to: SIMD2<FloatLiteralType>.self), SIMD2( rhs.real, rhs.imag)),
+			dot(unsafeBitCast(lhs, to: SIMD2<FloatLiteralType>.self), SIMD2(-rhs.imag, rhs.real))
 		) / rhs.magnitude, to: Self.self)
 	}
 	public var magnitude: FloatLiteralType {
-		length_squared(unsafeBitCast(self, to: SIMD2<FloatLiteralType>.self))
+		length(unsafeBitCast(self, to: SIMD2<FloatLiteralType>.self))
 	}
 }
