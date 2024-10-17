@@ -102,7 +102,8 @@ extension Rational64: AtomicRepresentable {
 }
 @frozen public struct Rational128 {
 	public typealias IntegerLiteralType = Int64
-	public var rawValue: SIMD2<IntegerLiteralType>
+	public typealias RawValue = SIMD2<IntegerLiteralType>
+	public var rawValue: RawValue
 }
 extension Rational128: RationalNumber & CustomStringConvertible & ExpressibleByFloatLiteral {
 	public typealias Magnitude = Rational<IntegerLiteralType.Magnitude>
@@ -113,6 +114,14 @@ extension Rational128: RationalNumber & CustomStringConvertible & ExpressibleByF
 	public var denominator: IntegerLiteralType { rawValue.y }
 	public init(numerator: IntegerLiteralType, denominator: IntegerLiteralType) {
 		rawValue = .init(numerator, denominator)
+	}
+}
+extension Rational128: AtomicRepresentable {
+	public static func encodeAtomicRepresentation(_ value: consuming Self) -> RawValue {
+		unsafeBitCast(self, to: RawValue.self)
+	}
+	public static func decodeAtomicRepresentation(_ storage: consuming RawValue) -> Self {
+		unsafeBitCast(storage, to: Self.self)
 	}
 }
 @frozen public struct Rational256 {
