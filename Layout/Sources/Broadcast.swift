@@ -43,7 +43,7 @@ public func broadcast<T: BinaryInteger>(lhs: some Collection<T>, rhs: some Colle
 	let count = max(lhs.count, rhs.count)
 	return zip(concat(repeatElement(1, count: count - lhs.count), lhs),
 			   concat(repeatElement(1, count: count - rhs.count), rhs))
-		.map(broadcast)
+	.map(broadcast(x:y:))
 }
 @inlinable @inline(__always)
 public func broadcast<T: BinaryInteger>(a: some Collection<T>, b: some Collection<T>, c: some Collection<T>) -> Array<T> {
@@ -51,12 +51,16 @@ public func broadcast<T: BinaryInteger>(a: some Collection<T>, b: some Collectio
 	return zip(concat(repeatElement(1, count: count - a.count), a),
 			   concat(repeatElement(1, count: count - b.count), b),
 			   concat(repeatElement(1, count: count - c.count), c))
-		.map(broadcast)
+	.map(broadcast(x:y:z:))
+}
+@inlinable @inline(__always)
+public func broadcast<T: BinaryInteger>(target: T, source: T, stride: T) -> T {
+	min(1, source / max(1, target), stride)
 }
 @inlinable @inline(__always)
 public func broadcast<T: BinaryInteger>(target: some Collection<T>, source: some Collection<T>, stride: some Collection<T>) -> Array<T> {
 	zip(target,
 		concat(repeatElement(1, count: target.count - source.count), source),
 		concat(repeatElement(0, count: target.count - stride.count), stride))
-	.map { min(1, $1 / max(1, $0)) * $2 }
+	.map(broadcast(target:source:stride:))
 }
