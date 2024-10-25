@@ -55,7 +55,7 @@ public func broadcast<T: BinaryInteger>(a: some Collection<T>, b: some Collectio
 }
 @inlinable @inline(__always)
 public func broadcast<T: BinaryInteger>(target: T, source: T, stride: T) -> T {
-	min(1, source / max(1, target), stride)
+	min(1, source / max(1, target)) * stride
 }
 @inlinable @inline(__always)
 public func broadcast<T: BinaryInteger>(target: some Collection<T>, source: some Collection<T>, stride: some Collection<T>) -> Array<T> {
