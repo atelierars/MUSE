@@ -18,21 +18,21 @@ public func concat<Element>(_ head: some Sequence<Element>, _ tail: some Sequenc
 }
 @inlinable @inline(__always)
 public func concat<Element>(_ list: some Sequence<some Sequence<Element>>) -> some Sequence<Element> {
-	list.lazy.flatMap { $0 }
+	list.lazy.flatMap(\.self)
 }
 @inlinable @inline(__always)
 public func concat<Element>(_ list: some Sequence<some Sequence<some Sequence<Element>>>) -> some Sequence<Element> {
-	list.lazy.flatMap { $0.lazy.flatMap { $0 } }
+	list.lazy.flatMap(\.self).lazy.flatMap(\.self)
 }
 extension Sequence where Element: Sequence {
 	@inlinable @inline(__always)
 	public var merge: some Sequence<Element.Element> {
-		lazy.flatMap { $0 }
+		lazy.flatMap(\.self)
 	}
 }
 extension Sequence where Element: Sequence, Element.Element: Sequence {
 	@inlinable @inline(__always)
 	public var merge: some Sequence<Element.Element.Element> {
-		lazy.flatMap { $0.lazy.flatMap { $0 } }
+		lazy.flatMap(\.self).lazy.flatMap(\.self)
 	}
 }
