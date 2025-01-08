@@ -3,7 +3,7 @@ import PackageDescription
 let package = Package(
     name: "MUSE",
 	platforms: [
-		.macOS(.v15),
+		.macOS(.v14),
 		.macCatalyst(.v18),
 		.iOS(.v18),
 		.tvOS(.v18)
